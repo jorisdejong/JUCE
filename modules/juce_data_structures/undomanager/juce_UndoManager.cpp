@@ -213,6 +213,7 @@ void UndoManager::beginNewTransaction()
 
 void UndoManager::beginNewTransaction (const String& actionName)
 {
+    DBG( "New Undo: " + actionName );
     newTransaction = true;
     newTransactionName = actionName;
 }
