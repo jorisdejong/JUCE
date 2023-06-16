@@ -2583,6 +2583,8 @@ void Component::internalMouseUp (MouseInputSource source, const PointerState& re
     // check for double-click
     if (me.getNumberOfClicks() >= 2)
     {
+        if ( String( PRODUCTID ) == "740" )
+            return;
         mouseDoubleClick (checker.eventWithNearestParent());
 
         if (checker.shouldBailOut())
