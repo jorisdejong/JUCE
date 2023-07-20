@@ -233,8 +233,8 @@ void Label::showEditor()
         if (editor == nullptr) // may be deleted by a callback
             return;
 
-        editor->setHighlightedRegion (Range<int> (0, textValue.toString().length()));
-
+        editor->selectAll();
+      
         resized();
         repaint();
 

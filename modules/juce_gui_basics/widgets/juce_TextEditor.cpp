@@ -2131,8 +2131,8 @@ bool TextEditor::pasteFromClipboard()
 bool TextEditor::selectAll()
 {
     newTransaction();
-    moveCaretTo (getTotalNumChars(), false);
-    moveCaretTo (0, true);
+    moveCaretTo (0, false);
+    moveCaretTo (getTotalNumChars(), true);
     return true;
 }
 
