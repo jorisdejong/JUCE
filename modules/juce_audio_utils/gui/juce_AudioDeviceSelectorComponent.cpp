@@ -209,7 +209,8 @@ static String getNoDeviceString()   { return "<< " + TRANS("none") + " >>"; }
 
 //==============================================================================
 class AudioDeviceSettingsPanel : public Component,
-                                 private ChangeListener
+                                 private ChangeListener,
+                                 public ChangeBroadcaster
 {
 public:
     AudioDeviceSettingsPanel (AudioIODeviceType& t, AudioDeviceSetupDetails& setupDetails,
@@ -425,6 +426,7 @@ public:
     {
         showAdvancedSettingsButton->setButtonText ((showAdvancedSettingsButton->getToggleState() ? "Hide " : "Show ")
                                                    + String ("advanced settings..."));
+        sendChangeMessage();
         resized();
     }
 
@@ -1152,6 +1154,7 @@ void AudioDeviceSelectorComponent::updateAllControls()
             details.useStereoPairs = showChannelsAsStereoPairs;
 
             auto* sp = new AudioDeviceSettingsPanel (*type, details, hideAdvancedOptionsWithButton);
+            sp->addChangeListener( this );
             audioDeviceSettingsComp.reset (sp);
             addAndMakeVisible (sp);
             sp->updateAllControls();
