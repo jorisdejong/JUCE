@@ -111,15 +111,16 @@ namespace FlacNamespace
  #endif
 
  JUCE_BEGIN_IGNORE_WARNINGS_GCC_LIKE ("-Wconversion",
-                                      "-Wshadow",
                                       "-Wdeprecated-register",
-                                      "-Wswitch-enum",
-                                      "-Wswitch-default",
+                                      "-Wfloat-equal",
                                       "-Wimplicit-fallthrough",
-                                      "-Wzero-as-null-pointer-constant",
-                                      "-Wsign-conversion",
+                                      "-Wlanguage-extension-token",
                                       "-Wredundant-decls",
-                                      "-Wlanguage-extension-token")
+                                      "-Wshadow",
+                                      "-Wsign-conversion",
+                                      "-Wswitch-default",
+                                      "-Wswitch-enum",
+                                      "-Wzero-as-null-pointer-constant")
 
  #if JUCE_INTEL
   #if JUCE_32BIT
@@ -182,7 +183,7 @@ template <typename Item>
 auto emptyRange (Item item) { return Range<Item>::emptyRange (item); }
 
 //==============================================================================
-class FlacReader  : public AudioFormatReader
+class FlacReader final : public AudioFormatReader
 {
 public:
     FlacReader (InputStream* in)  : AudioFormatReader (in, flacFormatName)
@@ -385,7 +386,7 @@ private:
 
 
 //==============================================================================
-class FlacWriter  : public AudioFormatWriter
+class FlacWriter final : public AudioFormatWriter
 {
 public:
     FlacWriter (OutputStream* out, double rate, uint32 numChans, uint32 bits, int qualityOptionIndex)
@@ -496,8 +497,7 @@ public:
         packUint32 ((FLAC__uint32) info.total_samples, buffer + 14, 4);
         memcpy (buffer + 18, info.md5sum, 16);
 
-        const bool seekOk = output->setPosition (streamStartPos + 4);
-        ignoreUnused (seekOk);
+        [[maybe_unused]] const bool seekOk = output->setPosition (streamStartPos + 4);
 
         // if this fails, you've given it an output stream that can't seek! It needs
         // to be able to seek back to write the header
