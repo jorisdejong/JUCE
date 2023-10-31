@@ -230,6 +230,8 @@ public:
 
         setup.manager->addChangeListener (this);
 
+        addChangeListener( &parent );
+
         updateAllControls();
     }
 
@@ -1153,9 +1155,10 @@ void AudioDeviceSelectorComponent::updateAllControls()
             details.maxNumOutputChannels = maxOutputChannels;
             details.useStereoPairs = showChannelsAsStereoPairs;
 
-            audioDeviceSettingsComp = std::make_unique<AudioDeviceSettingsPanel> (*type, details, hideAdvancedOptionsWithButton, *this);
+           
+            audioDeviceSettingsComp = std::make_unique<AudioDeviceSettingsPanel>( *type, details, hideAdvancedOptionsWithButton, *this );
             addAndMakeVisible (audioDeviceSettingsComp.get());
-            audioDeviceSettingsComp->addChangeListener( this );
+            
         }
     }
 
