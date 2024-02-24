@@ -208,6 +208,8 @@ constexpr bool exactlyEqual (Type a, Type b)
 /** A class encapsulating both relative and absolute tolerances for use in floating-point comparisons.
 
     @see approximatelyEqual, absoluteTolerance, relativeTolerance
+
+    @tags{Core}
 */
 template <typename Type>
 class Tolerance
@@ -796,5 +798,14 @@ namespace TypeHelpers
  [[deprecated ("Use roundToInt instead.")]] inline int roundFloatToInt  (float  value) noexcept  { return roundToInt (value); }
  [[deprecated ("Use std::abs() instead.")]] inline int64 abs64 (int64 n) noexcept                { return std::abs (n); }
 #endif
+
+/** Converts an enum to its underlying integral type.
+    Similar to std::to_underlying, which is only available in C++23 and above.
+*/
+template <typename T>
+constexpr auto toUnderlyingType (T t) -> std::enable_if_t<std::is_enum_v<T>, std::underlying_type_t<T>>
+{
+    return static_cast<std::underlying_type_t<T>> (t);
+}
 
 } // namespace juce

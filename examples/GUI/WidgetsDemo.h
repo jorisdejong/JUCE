@@ -135,47 +135,47 @@ struct SlidersPage final : public Component
         s->setTextValueSuffix (" rels");
 
         sliderArea.removeFromLeft (20);
-        auto horizonalSliderArea = sliderArea.removeFromLeft (180);
+        auto horizontalSliderArea = sliderArea.removeFromLeft (180);
 
         s = createSlider (true);
         s->setSliderStyle (Slider::LinearHorizontal);
         s->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
-        s->setBounds (horizonalSliderArea.removeFromTop (20));
+        s->setBounds (horizontalSliderArea.removeFromTop (20));
 
         s = createSlider (false);
         s->setSliderStyle (Slider::LinearHorizontal);
         s->setTextBoxStyle (Slider::NoTextBox, false, 0, 0);
-        horizonalSliderArea.removeFromTop (20);
-        s->setBounds (horizonalSliderArea.removeFromTop (20));
+        horizontalSliderArea.removeFromTop (20);
+        s->setBounds (horizontalSliderArea.removeFromTop (20));
         s->setPopupDisplayEnabled (true, false, this);
         s->setTextValueSuffix (" nuns required to change a lightbulb");
 
         s = createSlider (false);
         s->setSliderStyle (Slider::LinearHorizontal);
         s->setTextBoxStyle (Slider::TextEntryBoxPosition::TextBoxAbove, false, 70, 20);
-        horizonalSliderArea.removeFromTop (20);
-        s->setBounds (horizonalSliderArea.removeFromTop (50));
+        horizontalSliderArea.removeFromTop (20);
+        s->setBounds (horizontalSliderArea.removeFromTop (50));
         s->setPopupDisplayEnabled (true, false, this);
 
         s = createSlider (false);
         s->setSliderStyle (Slider::IncDecButtons);
         s->setTextBoxStyle (Slider::TextBoxLeft, false, 50, 20);
-        horizonalSliderArea.removeFromTop (20);
-        s->setBounds (horizonalSliderArea.removeFromTop (20));
+        horizontalSliderArea.removeFromTop (20);
+        s->setBounds (horizontalSliderArea.removeFromTop (20));
         s->setIncDecButtonsMode (Slider::incDecButtonsDraggable_Vertical);
 
         s = createSlider (false);
         s->setSliderStyle (Slider::Rotary);
         s->setRotaryParameters (MathConstants<float>::pi * 1.2f, MathConstants<float>::pi * 2.8f, false);
         s->setTextBoxStyle (Slider::TextBoxRight, false, 70, 20);
-        horizonalSliderArea.removeFromTop (15);
-        s->setBounds (horizonalSliderArea.removeFromTop (70));
+        horizontalSliderArea.removeFromTop (15);
+        s->setBounds (horizontalSliderArea.removeFromTop (70));
         s->setTextValueSuffix (" mm");
 
         s = createSlider (false);
         s->setSliderStyle (Slider::LinearBar);
-        horizonalSliderArea.removeFromTop (10);
-        s->setBounds (horizonalSliderArea.removeFromTop (30));
+        horizontalSliderArea.removeFromTop (10);
+        s->setBounds (horizontalSliderArea.removeFromTop (30));
         s->setTextValueSuffix (" gallons");
 
         sliderArea.removeFromLeft (20);
@@ -690,7 +690,7 @@ struct MenuPage final : public Component
     {
         void drawPopupMenuColumnSeparatorWithOptions (Graphics& g,
                                                       const Rectangle<int>& bounds,
-                                                      const PopupMenu::Options& opt)
+                                                      const PopupMenu::Options& opt) override
         {
             if (auto* target = opt.getTargetComponent())
             {
@@ -708,7 +708,7 @@ struct MenuPage final : public Component
             }
         }
 
-        void drawPopupMenuBackgroundWithOptions (Graphics& g, int, int, const PopupMenu::Options& opt)
+        void drawPopupMenuBackgroundWithOptions (Graphics& g, int, int, const PopupMenu::Options& opt) override
         {
             if (auto* target = opt.getTargetComponent())
             {
@@ -717,7 +717,7 @@ struct MenuPage final : public Component
         }
 
         // Return the amount of space that should be left between popup menu columns.
-        int getPopupMenuColumnSeparatorWidthWithOptions (const PopupMenu::Options&)
+        int getPopupMenuColumnSeparatorWidthWithOptions (const PopupMenu::Options&) override
         {
             return 10;
         }

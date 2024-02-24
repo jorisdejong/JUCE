@@ -513,6 +513,13 @@ public:
         asyncConfigCallback.startConfigure();
     }
 
+    void willRemoveRegionSequence (ARA::PlugIn::RegionSequence* rs) noexcept override
+    {
+        auto* rsToRemove = static_cast<ARARegionSequence*> (rs);
+        rsToRemove->removeListener (this);
+        regionSequences.erase (rsToRemove);
+    }
+
     void didAddPlaybackRegion (ARA::PlugIn::PlaybackRegion*) noexcept override
     {
         asyncConfigCallback.startConfigure();
