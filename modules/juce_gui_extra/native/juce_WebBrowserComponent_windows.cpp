@@ -1102,7 +1102,7 @@ void WebBrowserComponent::paint (Graphics& g)
 
 void WebBrowserComponent::checkWindowAssociation()
 {
-    if (isShowing())
+    if (true)
     {
         if (! browser->getInternalWebView().hasBrowserBeenCreated() && getPeer() != nullptr)
         {
